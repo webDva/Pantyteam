@@ -1,6 +1,7 @@
 package game.pantyteam;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -30,6 +31,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import ecs.Mappers;
+import ecs.components.PhysicsComponent;
+import ecs.components.PositionComponent;
 
 public class PlayScreen implements Screen {
 
@@ -107,12 +112,18 @@ public class PlayScreen implements Screen {
 		groundBody.setTransform(rect.getRectangle().x + rect.getRectangle().width / 2, rect.getRectangle().y + rect.getRectangle().height / 2, groundBody.getAngle());
 
 		engine = new Engine();
+		Entity player = new Entity();
+		player.add(new PositionComponent(100, 100));
+		player.add(new PhysicsComponent(world, Mappers.position.get(player).x, Mappers.position.get(player).y));
+		engine.addEntity(player);
 	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		engine.update(delta);
 
 		batch.setProjectionMatrix(camera.combined);
 
@@ -122,10 +133,11 @@ public class PlayScreen implements Screen {
 		batch.end();
 
 		debugRenderer.render(world, camera.combined);
-		world.step(1 / 300f, 6, 2);
 
 		stage.act();
 		stage.draw();
+
+		world.step(1 / 300f, 6, 2);
 	}
 
 	@Override
