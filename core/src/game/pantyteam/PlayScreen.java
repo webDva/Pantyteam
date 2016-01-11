@@ -58,14 +58,15 @@ public class PlayScreen implements Screen {
 	@Override
 	public void show() {
 		camera = new OrthographicCamera();
-		viewport = new FitViewport(Gdx.graphics.getWidth() * 1.8f, Gdx.graphics.getHeight() * 1.8f, camera);
+		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		viewport.apply();
 
 		stage = new Stage(new ScreenViewport(), batch);
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
-		table.setFillParent(true);
+		// table.setFillParent(true);
+		table.setPosition(0, 0);
 		stage.addActor(table);
 
 		table.setDebug(true);
