@@ -115,17 +115,17 @@ public class PlayScreen implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		batch.end();
 
 		tiledMapRenderer.render();
+
+		batch.begin();
+		batch.end();
 
 		debugRenderer.render(world, camera.combined);
 		world.step(1 / 300f, 6, 2);
 
 		stage.act();
 		stage.draw();
-
 	}
 
 	@Override
