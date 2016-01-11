@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2D;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -25,6 +29,9 @@ public class PlayScreen implements Screen {
 
 	private Stage stage;
 	private Skin skin; // use skin, if i can
+
+	private World world;
+	private Box2DDebugRenderer debugRenderer;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -53,6 +60,9 @@ public class PlayScreen implements Screen {
 
 		table.add(label1);
 
+		Box2D.init();
+		world = new World(new Vector2(0, -10), true);
+		debugRenderer = new Box2DDebugRenderer();
 	}
 
 	@Override
@@ -67,6 +77,9 @@ public class PlayScreen implements Screen {
 
 		stage.act();
 		stage.draw();
+
+		debugRenderer.render(world, camera.combined);
+		world.step(1 / 300f, 6, 2);
 	}
 
 	@Override
