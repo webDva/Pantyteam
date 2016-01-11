@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -57,7 +58,7 @@ public class PlayScreen implements Screen {
 	@Override
 	public void show() {
 		camera = new OrthographicCamera();
-		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+		viewport = new FitViewport(Gdx.graphics.getWidth() * 1.8f, Gdx.graphics.getHeight() * 1.8f, camera);
 		viewport.apply();
 
 		stage = new Stage(new ScreenViewport(), batch);
@@ -82,6 +83,11 @@ public class PlayScreen implements Screen {
 
 		tiledMap = new TmxMapLoader().load("map.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, batch);
+
+		MapProperties prop = tiledMap.getProperties();
+		camera.position.set(prop.get("width", Integer.class) * prop.get("tilewidth", Integer.class) / 2,
+				prop.get("height", Integer.class) * prop.get("tileheight", Integer.class) / 2, 0);
+		camera.update();
 		tiledMapRenderer.setView(camera);
 
 		platformLayer = tiledMap.getLayers().get("platforms");
