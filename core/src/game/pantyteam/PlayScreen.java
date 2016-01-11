@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -27,7 +26,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class PlayScreen implements Screen {
 
 	private SpriteBatch batch;
-	Texture img;
 	private OrthographicCamera camera;
 	private FitViewport viewport;
 
@@ -46,7 +44,6 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void show() {
-		img = new Texture("badlogic.jpg");
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		viewport.apply();
@@ -82,7 +79,6 @@ public class PlayScreen implements Screen {
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(img, 0, 0);
 		batch.end();
 
 		tiledMapRenderer.setView(camera);
