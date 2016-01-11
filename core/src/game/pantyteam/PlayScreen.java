@@ -39,6 +39,7 @@ import ecs.Mappers;
 import ecs.components.PhysicsComponent;
 import ecs.components.PositionComponent;
 import ecs.components.TextureComponent;
+import ecs.systems.MovementSystem;
 import ecs.systems.RenderSystem;
 
 public class PlayScreen implements Screen {
@@ -60,6 +61,7 @@ public class PlayScreen implements Screen {
 	MapObjects platforms;
 
 	Engine engine;
+	MovementSystem movementSystem;
 
 	TextureAtlas arrows;
 	Button upArrow, leftArrow, downArrow, rightArrow;
@@ -98,6 +100,8 @@ public class PlayScreen implements Screen {
 		table.add(label1);
 
 		/********************************************************** arrow buttons ********************/
+		movementSystem = new MovementSystem();
+
 		upArrow = new Button(skin.getDrawable("up_arrow"));
 		upArrow.addListener(new ChangeListener() {
 			@Override
@@ -112,9 +116,10 @@ public class PlayScreen implements Screen {
 		leftArrow.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if (leftArrow.isPressed()) {
-
-				}
+				if (leftArrow.isPressed())
+					movementSystem.moveLeft(true);
+				else
+					movementSystem.moveRight(false);
 			}
 		});
 
@@ -132,9 +137,10 @@ public class PlayScreen implements Screen {
 		rightArrow.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if (rightArrow.isPressed()) {
-
-				}
+				if (rightArrow.isPressed())
+					movementSystem.moveRight(true);
+				else
+					movementSystem.moveRight(false);
 			}
 		});
 
@@ -190,6 +196,7 @@ public class PlayScreen implements Screen {
 		player.add(new TextureComponent("images/first_girl.png"));
 		engine.addEntity(player);
 
+		engine.addSystem(movementSystem);
 		engine.addSystem(new RenderSystem(batch));
 	}
 
