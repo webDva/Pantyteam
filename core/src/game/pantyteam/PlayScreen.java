@@ -24,12 +24,14 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -60,6 +62,7 @@ public class PlayScreen implements Screen {
 	Engine engine;
 
 	TextureAtlas arrows;
+	Button upArrow, leftArrow, downArrow, rightArrow;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -95,12 +98,45 @@ public class PlayScreen implements Screen {
 		table.add(label1);
 
 		/********************************************************** arrow buttons ********************/
-		Button upArrow, leftArrow, downArrow, rightArrow;
-
 		upArrow = new Button(skin.getDrawable("up_arrow"));
+		upArrow.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				if (upArrow.isPressed()) {
+
+				}
+			}
+		});
+
 		leftArrow = new Button(skin.getDrawable("left_arrow"));
+		leftArrow.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				if (leftArrow.isPressed()) {
+
+				}
+			}
+		});
+
 		downArrow = new Button(skin.getDrawable("down_arrow"));
+		downArrow.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				if (downArrow.isPressed()) {
+
+				}
+			}
+		});
+
 		rightArrow = new Button(skin.getDrawable("right_arrow"));
+		rightArrow.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				if (rightArrow.isPressed()) {
+
+				}
+			}
+		});
 
 		Table arrows = new Table(skin);
 		arrows.setScale(0.5f);
