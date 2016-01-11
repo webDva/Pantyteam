@@ -4,11 +4,11 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
@@ -58,6 +58,8 @@ public class PlayScreen implements Screen {
 
 	Engine engine;
 
+	TextureAtlas arrows;
+
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
 	}
@@ -68,6 +70,7 @@ public class PlayScreen implements Screen {
 		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		viewport.apply();
 
+		/************************* User Interface *************************************/
 		stage = new Stage(new ScreenViewport(), batch);
 		Gdx.input.setInputProcessor(stage);
 
@@ -78,17 +81,24 @@ public class PlayScreen implements Screen {
 
 		table.setDebug(true);
 
-		skin = new Skin();
+		arrows = new TextureAtlas(Gdx.files.internal("arrows/arrows.atlas"));
 
-		LabelStyle labelStyle = new LabelStyle(new BitmapFont(), Color.WHITE);
+		skin = new Skin();
+		skin.addRegions(arrows);
+
+		skin.add("my_font", new BitmapFont(), BitmapFont.class);
+
+		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
 		Label label1 = new Label("Health", labelStyle);
 
 		table.add(label1);
 
+		/************************************ Box2D *************************************************/
 		Box2D.init();
 		world = new World(new Vector2(0, -10), true);
 		debugRenderer = new Box2DDebugRenderer();
 
+		/********************************** Tiled map ***********************************************/
 		tiledMap = new TmxMapLoader().load("map.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, batch);
 
@@ -113,6 +123,7 @@ public class PlayScreen implements Screen {
 		groundBox.dispose();
 		groundBody.setTransform(rect.getRectangle().x + rect.getRectangle().width / 2, rect.getRectangle().y + rect.getRectangle().height / 2, groundBody.getAngle());
 
+		/****************************************** Ashley ECS ****************************************************/
 		engine = new Engine();
 		Entity player = new Entity();
 		player.add(new PositionComponent(500, 500));
@@ -172,6 +183,7 @@ public class PlayScreen implements Screen {
 	@Override
 	public void dispose() {
 		stage.dispose();
+		arrows.dispose();
 	}
 
 }
