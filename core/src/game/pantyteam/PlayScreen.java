@@ -24,7 +24,7 @@ public class PlayScreen implements Screen {
 	private FitViewport viewport;
 
 	private Stage stage;
-	private Skin skin; // use skin
+	private Skin skin; // use skin, if i can
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
-		// table.setFillParent(true);
+		table.setFillParent(true);
 		stage.addActor(table);
 
 		table.setDebug(true);
