@@ -88,11 +88,12 @@ public class PlayScreen implements Screen {
 		platforms = platformLayer.getObjects();
 
 		BodyDef groundBodyDef = new BodyDef();
-		groundBodyDef.position.set(((RectangleMapObject) platforms.get("ground")).getRectangle().x, ((RectangleMapObject) platforms.get("ground")).getRectangle().y);
+		RectangleMapObject rect = ((RectangleMapObject) platforms.get("ground"));
+		groundBodyDef.position.set(rect.getRectangle().x, rect.getRectangle().y);
 		Body groundBody = world.createBody(groundBodyDef);
 
 		PolygonShape groundBox = new PolygonShape();
-		groundBox.setAsBox(((RectangleMapObject) platforms.get("ground")).getRectangle().width / 2, ((RectangleMapObject) platforms.get("ground")).getRectangle().height / 2);
+		groundBox.setAsBox(rect.getRectangle().width / 2, rect.getRectangle().height / 2);
 		groundBody.createFixture(groundBox, 0);
 		groundBox.dispose();
 
