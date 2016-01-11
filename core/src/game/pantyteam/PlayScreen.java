@@ -93,9 +93,11 @@ public class PlayScreen implements Screen {
 		Body groundBody = world.createBody(groundBodyDef);
 
 		PolygonShape groundBox = new PolygonShape();
+
 		groundBox.setAsBox(rect.getRectangle().width / 2, rect.getRectangle().height / 2);
 		groundBody.createFixture(groundBox, 0);
 		groundBox.dispose();
+		groundBody.setTransform(rect.getRectangle().x + rect.getRectangle().width / 2, rect.getRectangle().y + rect.getRectangle().height / 2, groundBody.getAngle());
 
 		engine = new Engine();
 	}
