@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class PlayScreen implements Screen {
 
@@ -14,6 +16,8 @@ public class PlayScreen implements Screen {
 	Texture img;
 	private OrthographicCamera camera;
 	private FitViewport viewport;
+
+	private Stage stage;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -25,6 +29,8 @@ public class PlayScreen implements Screen {
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		viewport.apply();
+
+		stage = new Stage(new ScreenViewport(), batch);
 	}
 
 	@Override
@@ -36,6 +42,9 @@ public class PlayScreen implements Screen {
 		batch.begin();
 		batch.draw(img, 0, 0);
 		batch.end();
+
+		stage.act();
+		stage.draw();
 	}
 
 	@Override
