@@ -107,7 +107,7 @@ public class PlayScreen implements Screen {
 
 		arrows.add(upArrow).padLeft(skin.getRegion("up_arrow").getRegionWidth());
 		arrows.row();
-		arrows.add(leftArrow).spaceRight(skin.getRegion("left_arrow").getRegionWidth());
+		arrows.add(leftArrow).padRight(skin.getRegion("left_arrow").getRegionWidth());
 		arrows.add(rightArrow);
 		arrows.row();
 		arrows.add(downArrow).padLeft(skin.getRegion("down_arrow").getRegionWidth());
