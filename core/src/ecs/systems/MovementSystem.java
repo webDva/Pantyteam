@@ -13,7 +13,7 @@ import ecs.components.TextureComponent;
 
 public class MovementSystem extends EntitySystem {
 	private ImmutableArray<Entity> player;
-	private boolean moveLeft, moveRight;
+	public boolean moveLeft, moveRight;
 
 	public MovementSystem() {
 		moveLeft = false;
@@ -29,10 +29,11 @@ public class MovementSystem extends EntitySystem {
 	@Override
 	public void update(float deltaTime) {
 		for (Entity p : player) {
-			if (moveLeft)
+			if (moveLeft) {
 				Mappers.physics.get(p).body.setLinearVelocity(-10, 0);
-			if (moveRight)
+			} else if (moveRight) {
 				Mappers.physics.get(p).body.setLinearVelocity(10, 0);
+			}
 		}
 	}
 

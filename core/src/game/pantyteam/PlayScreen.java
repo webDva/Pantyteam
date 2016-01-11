@@ -39,7 +39,6 @@ import ecs.Mappers;
 import ecs.components.PhysicsComponent;
 import ecs.components.PositionComponent;
 import ecs.components.TextureComponent;
-import ecs.systems.MovementSystem;
 import ecs.systems.RenderSystem;
 
 public class PlayScreen implements Screen {
@@ -61,7 +60,7 @@ public class PlayScreen implements Screen {
 	MapObjects platforms;
 
 	Engine engine;
-	MovementSystem movementSystem;
+	Entity player;
 
 	TextureAtlas arrows;
 	Button leftArrow, rightArrow;
@@ -75,6 +74,21 @@ public class PlayScreen implements Screen {
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		viewport.apply();
+
+		/************************************ Box2D *************************************************/
+		Box2D.init();
+		world = new World(new Vector2(0, -10), true);
+		debugRenderer = new Box2DDebugRenderer();
+
+		/****************************************** Ashley ECS ****************************************************/
+		engine = new Engine();
+		player = new Entity();
+		player.add(new PositionComponent(500, 500));
+		player.add(new TextureComponent("images/first_girl.png"));
+		player.add(new PhysicsComponent(world, Mappers.position.get(player).x, Mappers.position.get(player).y, Mappers.texture.get(player).texture));
+		engine.addEntity(player);
+
+		engine.addSystem(new RenderSystem(batch));
 
 		/************************* User Interface *************************************/
 		stage = new Stage(new ScreenViewport(), batch);
@@ -100,16 +114,13 @@ public class PlayScreen implements Screen {
 		table.add(label1);
 
 		/********************************************************** arrow buttons ********************/
-		movementSystem = new MovementSystem();
-
 		leftArrow = new Button(skin.getDrawable("left_arrow"));
 		leftArrow.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				if (leftArrow.isPressed()) {
-					movementSystem.moveLeft(true);
-				} else
-					movementSystem.moveLeft(false);
+					Mappers.physics.get(player).body.setLinearVelocity(-10, 0);
+				}
 			}
 		});
 
@@ -118,9 +129,8 @@ public class PlayScreen implements Screen {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				if (rightArrow.isPressed()) {
-					movementSystem.moveRight(true);
-				} else
-					movementSystem.moveRight(false);
+					Mappers.physics.get(player).body.setLinearVelocity(10, 0);
+				}
 			}
 		});
 
@@ -132,11 +142,6 @@ public class PlayScreen implements Screen {
 		arrows.setDebug(true);
 		stage.addActor(arrows);
 		arrows.setPosition(200, 150);
-
-		/************************************ Box2D *************************************************/
-		Box2D.init();
-		world = new World(new Vector2(0, -10), true);
-		debugRenderer = new Box2DDebugRenderer();
 
 		/********************************** Tiled map ***********************************************/
 		tiledMap = new TmxMapLoader().load("map.tmx");
@@ -163,16 +168,6 @@ public class PlayScreen implements Screen {
 		groundBox.dispose();
 		groundBody.setTransform(rect.getRectangle().x + rect.getRectangle().width / 2, rect.getRectangle().y + rect.getRectangle().height / 2, groundBody.getAngle());
 
-		/****************************************** Ashley ECS ****************************************************/
-		engine = new Engine();
-		Entity player = new Entity();
-		player.add(new PositionComponent(500, 500));
-		player.add(new TextureComponent("images/first_girl.png"));
-		player.add(new PhysicsComponent(world, Mappers.position.get(player).x, Mappers.position.get(player).y, Mappers.texture.get(player).texture));
-		engine.addEntity(player);
-
-		engine.addSystem(movementSystem);
-		engine.addSystem(new RenderSystem(batch));
 	}
 
 	@Override
