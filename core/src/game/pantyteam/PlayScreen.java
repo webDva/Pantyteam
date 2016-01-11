@@ -105,16 +105,16 @@ public class PlayScreen implements Screen {
 		Table arrows = new Table(skin);
 		arrows.setScale(0.5f);
 
-		arrows.add(upArrow);
+		arrows.add(upArrow).padLeft(skin.getRegion("up_arrow").getRegionWidth());
 		arrows.row();
-		arrows.add(leftArrow).bottom().left().colspan(2);
-		arrows.add(rightArrow).bottom().right();
+		arrows.add(leftArrow).spaceRight(skin.getRegion("left_arrow").getRegionWidth());
+		arrows.add(rightArrow);
 		arrows.row();
-		arrows.add(downArrow);
+		arrows.add(downArrow).padLeft(skin.getRegion("down_arrow").getRegionWidth());
 
 		arrows.setDebug(true);
 		stage.addActor(arrows);
-		arrows.setPosition(200, 100);
+		arrows.setPosition(200, 150);
 
 		/************************************ Box2D *************************************************/
 		Box2D.init();
