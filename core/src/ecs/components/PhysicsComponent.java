@@ -29,8 +29,8 @@ public class PhysicsComponent implements Component {
 
 		fixtureDef = new FixtureDef();
 		fixtureDef.shape = box;
-		fixtureDef.density = 0.2f;
-		fixtureDef.friction = 0.6f;
+		fixtureDef.density = 0.1f;
+		fixtureDef.friction = 0.1f;
 		fixtureDef.restitution = 0;
 
 		fixture = body.createFixture(fixtureDef);
