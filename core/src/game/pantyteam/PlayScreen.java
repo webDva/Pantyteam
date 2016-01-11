@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -32,6 +36,9 @@ public class PlayScreen implements Screen {
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
+
+	TiledMap tiledMap;
+	TiledMapRenderer tiledMapRenderer;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -63,6 +70,9 @@ public class PlayScreen implements Screen {
 		Box2D.init();
 		world = new World(new Vector2(0, -10), true);
 		debugRenderer = new Box2DDebugRenderer();
+
+		tiledMap = new TmxMapLoader().load("map.tmx");
+		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, batch);
 	}
 
 	@Override
@@ -75,11 +85,15 @@ public class PlayScreen implements Screen {
 		batch.draw(img, 0, 0);
 		batch.end();
 
-		stage.act();
-		stage.draw();
+		tiledMapRenderer.setView(camera);
+		tiledMapRenderer.render();
 
 		debugRenderer.render(world, camera.combined);
 		world.step(1 / 300f, 6, 2);
+
+		stage.act();
+		stage.draw();
+
 	}
 
 	@Override
