@@ -66,7 +66,7 @@ public class PlayScreen implements Screen {
 
 		Table table = new Table();
 		// table.setFillParent(true);
-		table.setPosition(0, 0);
+		table.setPosition(25, 20);
 		stage.addActor(table);
 
 		table.setDebug(true);
