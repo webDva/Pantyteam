@@ -10,10 +10,10 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class PhysicsComponent implements Component {
-	BodyDef bodyDef;
-	Body body;
-	FixtureDef fixtureDef;
-	Fixture fixture;
+	public BodyDef bodyDef;
+	public Body body;
+	public FixtureDef fixtureDef;
+	public Fixture fixture;
 
 	public PhysicsComponent(World world, float x, float y) {
 		bodyDef = new BodyDef();
