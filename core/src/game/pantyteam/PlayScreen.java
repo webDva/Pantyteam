@@ -25,6 +25,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -76,7 +77,7 @@ public class PlayScreen implements Screen {
 
 		Table table = new Table();
 		// table.setFillParent(true);
-		table.setPosition(25, 20);
+		table.setPosition(200, 100);
 		stage.addActor(table);
 
 		table.setDebug(true);
@@ -91,8 +92,21 @@ public class PlayScreen implements Screen {
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
 		Label label1 = new Label("Health", labelStyle);
 
-		table.add(label1);
+		/********************************************************** arrow buttons ********************/
+		Button upArrow, leftArrow, downArrow, rightArrow;
 
+		upArrow = new Button(skin.getDrawable("up_arrow"));
+		leftArrow = new Button(skin.getDrawable("left_arrow"));
+		downArrow = new Button(skin.getDrawable("down_arrow"));
+		rightArrow = new Button(skin.getDrawable("right_arrow"));
+
+		Table arrows = new Table(skin);
+		arrows.setScale(0.5f);
+		arrows.add(upArrow, leftArrow, downArrow, rightArrow);
+		table.add(arrows);
+
+		table.row();
+		table.add(label1);
 		/************************************ Box2D *************************************************/
 		Box2D.init();
 		world = new World(new Vector2(0, -10), true);
