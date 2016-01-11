@@ -29,8 +29,8 @@ public class RenderSystem extends EntitySystem {
 	@Override
 	public void update(float deltaTime) {
 		for (Entity e : entitiestoRender) {
-			Mappers.position.get(e).x = Mappers.physics.get(e).body.getPosition().x;
-			Mappers.position.get(e).y = Mappers.physics.get(e).body.getPosition().y;
+			Mappers.position.get(e).x = Mappers.physics.get(e).body.getPosition().x - Mappers.texture.get(e).texture.getWidth() / 2;
+			Mappers.position.get(e).y = Mappers.physics.get(e).body.getPosition().y - Mappers.texture.get(e).texture.getHeight() / 2;
 		}
 
 		batch.setProjectionMatrix(batch.getProjectionMatrix());

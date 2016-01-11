@@ -23,7 +23,7 @@ public class PhysicsComponent implements Component {
 		body = world.createBody(bodyDef);
 
 		CircleShape circle = new CircleShape();
-		circle.setRadius(20f);
+		circle.setRadius(25f);
 
 		fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
