@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -37,6 +39,9 @@ public class PlayScreen implements Screen {
 
 	TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
+
+	MapLayer platformLayer;
+	MapObjects platforms;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -71,6 +76,9 @@ public class PlayScreen implements Screen {
 		tiledMap = new TmxMapLoader().load("map.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, batch);
 		tiledMapRenderer.setView(camera);
+
+		platformLayer = tiledMap.getLayers().get("platforms");
+		platforms = platformLayer.getObjects();
 	}
 
 	@Override
