@@ -31,6 +31,7 @@ public class PlayScreen implements Screen {
 		viewport.apply();
 
 		stage = new Stage(new ScreenViewport(), batch);
+		Gdx.input.setInputProcessor(stage);
 	}
 
 	@Override
@@ -50,6 +51,7 @@ public class PlayScreen implements Screen {
 	@Override
 	public void resize(int width, int height) {
 		viewport.update(width, height);
+		stage.getViewport().update(width, height, true);
 	}
 
 	@Override
