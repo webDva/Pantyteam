@@ -127,7 +127,6 @@ public class PlayScreen implements Screen {
 		});
 
 		Table arrows = new Table(skin);
-		arrows.setScale(0.5f);
 
 		arrows.add(leftArrow);
 		arrows.add(rightArrow);
@@ -135,9 +134,6 @@ public class PlayScreen implements Screen {
 		arrows.setDebug(true);
 		stage.addActor(arrows);
 		arrows.setPosition(200, 150);
-
-		leftArrow.setBounds(leftArrow.getX(), leftArrow.getY(), skin.getRegion("left_arrow").getRegionWidth(), skin.getRegion("left_arrow").getRegionHeight());
-		rightArrow.setBounds(rightArrow.getX(), rightArrow.getY(), skin.getRegion("right_arrow").getRegionWidth(), skin.getRegion("right_arrow").getRegionHeight());
 
 		/************************************ Box2D *************************************************/
 		Box2D.init();
