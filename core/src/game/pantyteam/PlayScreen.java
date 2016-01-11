@@ -64,7 +64,7 @@ public class PlayScreen implements Screen {
 	MovementSystem movementSystem;
 
 	TextureAtlas arrows;
-	Button upArrow, leftArrow, downArrow, rightArrow;
+	Button leftArrow, rightArrow;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -102,16 +102,6 @@ public class PlayScreen implements Screen {
 		/********************************************************** arrow buttons ********************/
 		movementSystem = new MovementSystem();
 
-		upArrow = new Button(skin.getDrawable("up_arrow"));
-		upArrow.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				if (upArrow.isPressed()) {
-
-				}
-			}
-		});
-
 		leftArrow = new Button(skin.getDrawable("left_arrow"));
 		leftArrow.addListener(new ChangeListener() {
 			@Override
@@ -121,16 +111,6 @@ public class PlayScreen implements Screen {
 					Gdx.app.log("XXXXXX", "MOVING LEFT");
 				} else
 					movementSystem.moveLeft(false);
-			}
-		});
-
-		downArrow = new Button(skin.getDrawable("down_arrow"));
-		downArrow.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				if (downArrow.isPressed()) {
-
-				}
 			}
 		});
 
@@ -149,12 +129,8 @@ public class PlayScreen implements Screen {
 		Table arrows = new Table(skin);
 		arrows.setScale(0.5f);
 
-		arrows.add(upArrow).padLeft(skin.getRegion("up_arrow").getRegionWidth());
-		arrows.row();
-		arrows.add(leftArrow).padRight(skin.getRegion("left_arrow").getRegionWidth());
+		arrows.add(leftArrow);
 		arrows.add(rightArrow);
-		arrows.row();
-		arrows.add(downArrow).padLeft(skin.getRegion("down_arrow").getRegionWidth());
 
 		arrows.setDebug(true);
 		stage.addActor(arrows);

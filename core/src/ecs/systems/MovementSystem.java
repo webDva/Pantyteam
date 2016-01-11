@@ -13,12 +13,10 @@ import ecs.components.TextureComponent;
 
 public class MovementSystem extends EntitySystem {
 	private ImmutableArray<Entity> player;
-	private boolean moveUp, moveLeft, moveDown, moveRight;
+	private boolean moveLeft, moveRight;
 
 	public MovementSystem() {
-		moveUp = false;
 		moveLeft = false;
-		moveDown = false;
 		moveRight = false;
 	}
 
