@@ -1,5 +1,6 @@
 package game.pantyteam;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -43,6 +44,8 @@ public class PlayScreen implements Screen {
 	MapLayer platformLayer;
 	MapObjects platforms;
 
+	Engine engine;
+
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
 	}
@@ -79,6 +82,8 @@ public class PlayScreen implements Screen {
 
 		platformLayer = tiledMap.getLayers().get("platforms");
 		platforms = platformLayer.getObjects();
+
+		engine = new Engine();
 	}
 
 	@Override
