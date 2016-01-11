@@ -113,7 +113,7 @@ public class PlayScreen implements Screen {
 
 		engine = new Engine();
 		Entity player = new Entity();
-		player.add(new PositionComponent(100, 100));
+		player.add(new PositionComponent(500, 500));
 		player.add(new PhysicsComponent(world, Mappers.position.get(player).x, Mappers.position.get(player).y));
 		engine.addEntity(player);
 	}
@@ -137,7 +137,7 @@ public class PlayScreen implements Screen {
 		stage.act();
 		stage.draw();
 
-		world.step(1 / 300f, 6, 2);
+		world.step(1 / 45f, 6, 2);
 	}
 
 	@Override
