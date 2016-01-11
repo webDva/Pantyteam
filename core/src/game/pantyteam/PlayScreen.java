@@ -108,7 +108,6 @@ public class PlayScreen implements Screen {
 			public void changed(ChangeEvent event, Actor actor) {
 				if (leftArrow.isPressed()) {
 					movementSystem.moveLeft(true);
-					Gdx.app.log("XXXXXX", "MOVING LEFT");
 				} else
 					movementSystem.moveLeft(false);
 			}
@@ -120,7 +119,6 @@ public class PlayScreen implements Screen {
 			public void changed(ChangeEvent event, Actor actor) {
 				if (rightArrow.isPressed()) {
 					movementSystem.moveRight(true);
-					Gdx.app.log("XXXXXXXXXX", "MOVING RIGHT");
 				} else
 					movementSystem.moveRight(false);
 			}
