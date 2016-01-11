@@ -27,7 +27,7 @@
   <object id="9" name="platform" x="704" y="96" width="192" height="33.3333"/>
   <object id="10" name="platform" x="382.667" y="257.333" width="258.667" height="30.6667"/>
   <object id="11" name="platform" x="769.333" y="320" width="190.667" height="32"/>
-  <object id="12" name="platform" x="0" y="448" width="960" height="32"/>
+  <object id="12" name="ground" x="0" y="448" width="960" height="32"/>
  </objectgroup>
  <objectgroup name="walls">
   <object id="15" name="wall" x="-41.3333" y="-25.3333" width="36" height="505.333"/>
