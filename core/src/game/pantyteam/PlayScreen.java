@@ -197,8 +197,8 @@ public class PlayScreen implements Screen {
 		engine = new Engine();
 		Entity player = new Entity();
 		player.add(new PositionComponent(500, 500));
-		player.add(new PhysicsComponent(world, Mappers.position.get(player).x, Mappers.position.get(player).y));
 		player.add(new TextureComponent("images/first_girl.png"));
+		player.add(new PhysicsComponent(world, Mappers.position.get(player).x, Mappers.position.get(player).y, Mappers.texture.get(player).texture));
 		engine.addEntity(player);
 
 		engine.addSystem(movementSystem);

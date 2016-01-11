@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.math.Vector2;
 
 import ecs.Mappers;
 import ecs.components.PhysicsComponent;
@@ -33,9 +32,9 @@ public class MovementSystem extends EntitySystem {
 	public void update(float deltaTime) {
 		for (Entity p : player) {
 			if (moveLeft)
-				Mappers.physics.get(p).body.applyLinearImpulse(new Vector2(-100, 0), Mappers.physics.get(p).body.getPosition(), true);
+				Mappers.physics.get(p).body.setLinearVelocity(-10, 0);
 			if (moveRight)
-				Mappers.physics.get(p).body.applyLinearImpulse(new Vector2(100, 0), Mappers.physics.get(p).body.getPosition(), true);
+				Mappers.physics.get(p).body.setLinearVelocity(10, 0);
 		}
 	}
 
