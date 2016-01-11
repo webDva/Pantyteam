@@ -35,6 +35,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import ecs.Mappers;
 import ecs.components.PhysicsComponent;
 import ecs.components.PositionComponent;
+import ecs.components.TextureComponent;
+import ecs.systems.RenderSystem;
 
 public class PlayScreen implements Screen {
 
@@ -115,7 +117,10 @@ public class PlayScreen implements Screen {
 		Entity player = new Entity();
 		player.add(new PositionComponent(500, 500));
 		player.add(new PhysicsComponent(world, Mappers.position.get(player).x, Mappers.position.get(player).y));
+		player.add(new TextureComponent("images/first_girl.png"));
 		engine.addEntity(player);
+
+		engine.addSystem(new RenderSystem(batch));
 	}
 
 	@Override
