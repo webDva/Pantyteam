@@ -47,6 +47,7 @@ public class PlayScreen implements Screen {
 		table.setDebug(true);
 
 		skin = new Skin();
+
 		LabelStyle labelStyle = new LabelStyle(new BitmapFont(), Color.WHITE);
 		Label label1 = new Label("Health", labelStyle);
 
