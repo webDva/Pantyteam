@@ -70,6 +70,7 @@ public class PlayScreen implements Screen {
 
 		tiledMap = new TmxMapLoader().load("map.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, batch);
+		tiledMapRenderer.setView(camera);
 	}
 
 	@Override
@@ -81,7 +82,6 @@ public class PlayScreen implements Screen {
 		batch.begin();
 		batch.end();
 
-		tiledMapRenderer.setView(camera);
 		tiledMapRenderer.render();
 
 		debugRenderer.render(world, camera.combined);
