@@ -24,6 +24,7 @@ public class PlayScreen implements Screen {
 	private FitViewport viewport;
 
 	private Stage stage;
+	private Skin skin; // use skin
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -40,12 +41,12 @@ public class PlayScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
-		table.setFillParent(true);
+		// table.setFillParent(true);
 		stage.addActor(table);
 
 		table.setDebug(true);
 
-		Skin skin = new Skin();
+		skin = new Skin();
 		LabelStyle labelStyle = new LabelStyle(new BitmapFont(), Color.WHITE);
 		Label label1 = new Label("Health", labelStyle);
 
