@@ -8,6 +8,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import ecs.Mappers;
+import ecs.components.PhysicsComponent;
 import ecs.components.PositionComponent;
 import ecs.components.TextureComponent;
 
@@ -22,11 +23,16 @@ public class RenderSystem extends EntitySystem {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void addedToEngine(Engine engine) {
-		entitiestoRender = engine.getEntitiesFor(Family.all(PositionComponent.class, TextureComponent.class).get());
+		entitiestoRender = engine.getEntitiesFor(Family.all(PositionComponent.class, TextureComponent.class, PhysicsComponent.class).get());
 	}
 
 	@Override
 	public void update(float deltaTime) {
+		for (Entity e : entitiestoRender) {
+			Mappers.position.get(e).x = Mappers.physics.get(e).body.getPosition().x;
+			Mappers.position.get(e).y = Mappers.physics.get(e).body.getPosition().y;
+		}
+
 		batch.setProjectionMatrix(batch.getProjectionMatrix());
 		batch.begin();
 
