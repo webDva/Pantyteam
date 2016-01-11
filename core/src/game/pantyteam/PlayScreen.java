@@ -104,7 +104,14 @@ public class PlayScreen implements Screen {
 
 		Table arrows = new Table(skin);
 		arrows.setScale(0.5f);
-		arrows.add(upArrow, leftArrow, downArrow, rightArrow);
+
+		arrows.add(upArrow);
+		arrows.row();
+		arrows.add(leftArrow).bottom().left().colspan(2);
+		arrows.add(rightArrow).bottom().right();
+		arrows.row();
+		arrows.add(downArrow);
+
 		arrows.setDebug(true);
 		stage.addActor(arrows);
 		arrows.setPosition(200, 100);
