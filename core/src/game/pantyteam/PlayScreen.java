@@ -77,7 +77,7 @@ public class PlayScreen implements Screen {
 
 		Table table = new Table();
 		// table.setFillParent(true);
-		table.setPosition(200, 100);
+		table.setPosition(50, Gdx.graphics.getHeight() - 70);
 		stage.addActor(table);
 
 		table.setDebug(true);
@@ -92,6 +92,8 @@ public class PlayScreen implements Screen {
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
 		Label label1 = new Label("Health", labelStyle);
 
+		table.add(label1);
+
 		/********************************************************** arrow buttons ********************/
 		Button upArrow, leftArrow, downArrow, rightArrow;
 
@@ -103,10 +105,10 @@ public class PlayScreen implements Screen {
 		Table arrows = new Table(skin);
 		arrows.setScale(0.5f);
 		arrows.add(upArrow, leftArrow, downArrow, rightArrow);
-		table.add(arrows);
+		arrows.setDebug(true);
+		stage.addActor(arrows);
+		arrows.setPosition(200, 100);
 
-		table.row();
-		table.add(label1);
 		/************************************ Box2D *************************************************/
 		Box2D.init();
 		world = new World(new Vector2(0, -10), true);
