@@ -116,10 +116,11 @@ public class PlayScreen implements Screen {
 		leftArrow.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if (leftArrow.isPressed())
+				if (leftArrow.isPressed()) {
 					movementSystem.moveLeft(true);
-				else
-					movementSystem.moveRight(false);
+					Gdx.app.log("XXXXXX", "MOVING LEFT");
+				} else
+					movementSystem.moveLeft(false);
 			}
 		});
 
@@ -137,9 +138,10 @@ public class PlayScreen implements Screen {
 		rightArrow.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if (rightArrow.isPressed())
+				if (rightArrow.isPressed()) {
 					movementSystem.moveRight(true);
-				else
+					Gdx.app.log("XXXXXXXXXX", "MOVING RIGHT");
+				} else
 					movementSystem.moveRight(false);
 			}
 		});
@@ -157,6 +159,9 @@ public class PlayScreen implements Screen {
 		arrows.setDebug(true);
 		stage.addActor(arrows);
 		arrows.setPosition(200, 150);
+
+		leftArrow.setBounds(leftArrow.getX(), leftArrow.getY(), skin.getRegion("left_arrow").getRegionWidth(), skin.getRegion("left_arrow").getRegionHeight());
+		rightArrow.setBounds(rightArrow.getX(), rightArrow.getY(), skin.getRegion("right_arrow").getRegionWidth(), skin.getRegion("right_arrow").getRegionHeight());
 
 		/************************************ Box2D *************************************************/
 		Box2D.init();

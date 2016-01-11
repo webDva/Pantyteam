@@ -33,9 +33,9 @@ public class MovementSystem extends EntitySystem {
 	public void update(float deltaTime) {
 		for (Entity p : player) {
 			if (moveLeft)
-				Mappers.physics.get(p).body.applyLinearImpulse(new Vector2(-10, 0), Mappers.physics.get(p).body.getPosition(), true);
+				Mappers.physics.get(p).body.applyLinearImpulse(new Vector2(-100, 0), Mappers.physics.get(p).body.getPosition(), true);
 			if (moveRight)
-				Mappers.physics.get(p).body.applyLinearImpulse(new Vector2(10, 0), Mappers.physics.get(p).body.getPosition(), true);
+				Mappers.physics.get(p).body.applyLinearImpulse(new Vector2(100, 0), Mappers.physics.get(p).body.getPosition(), true);
 		}
 	}
 
